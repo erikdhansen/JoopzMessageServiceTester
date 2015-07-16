@@ -31,17 +31,21 @@ public class JoopzMessageServiceTester {
         while(!done) {
             prompt();
             String input = console.readLine();
-            if(input.startsWith("add-outgoing-message")) {
-                addOutgoingMessage();
+            if(input.startsWith("addmsguser")) {
+                addOutgoingMessage(false);
             }
         }
     }
     
-    public void addOutgoingMessage() {
+    public void addOutgoingMessage(boolean group) {
         JsonObjectBuilder builder = Json.createObjectBuilder();
-        builder.add("user_id", "12345");
-        builder.add("contact_id", "12341");
-        builder.add("message", "This is a test message");
+        builder.add("user_id", 2);
+        if(group == true) {
+            builder.add("group_id", "11111");
+        } else {
+            builder.add("contact_id", 1089341);
+        }
+        builder.add("message", "Test to tmobile");
         JsonObject obj = builder.build();
         
         Jedis redis = new Jedis("localhost");
